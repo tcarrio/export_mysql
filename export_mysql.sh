@@ -119,13 +119,13 @@ fi
 if [ -z "$VERBOSE" ]; then
   exec 3>&1 4>&2
   trap 'exec 2>&4 1>&3' 0 1 2 3
-  exec 1>/dev/null 2>&1
-fi
 
-if [ -n "$LOGGER" ]; then
-  exec 3>&1 4>&2
-  trap 'exec 2>&4 1>&3' 0 1 2 3
-  exec 1>$LOGGER 2>&1
+  if [ -n "$LOGGER" ]; then
+    exec 1>$LOGGER 2>&1
+    
+  else
+    exec 1>/dev/null 2>&1
+  fi
 fi
 
 TIME_STAMP="`date +"%T"` "
@@ -136,7 +136,7 @@ SHOW_TABLES=$DIR/sql_tools/show_tables.sql
 
 ### Start of sqldump execution
 
-printf "Started at %s on %s\n" `date +"%T"` 
+printf "Started at %s on %s\n" $TIME_STAMP $DATE_STAMP
 mysql --user=$UN --password=$PW < $SHOW_DBS | sed '1d' | while read DB_NAME
 do
   if [ ! -d $BACK_DIR/$DATE_STAMP ]; then
