@@ -1,5 +1,5 @@
 #**********************************************************************************
-#* Name: 	backup_sqldump.sh                                                     *
+#* Name: 	dump-all-test.sh                                                     *
 #* Author: 	Tom Carrio                                                            *
 #* Function:    modular callscript for export_mysql tool                          *
 #* Last Modif.:	02/23/2016                                                        *
