@@ -1,17 +1,16 @@
 #**********************************************************************************
-#* Name: 	export_mysql.sh                                                         *
+#* Name: 	dump-all.sh                                                             *
 #* Author: 	Tom Carrio                                                            *
 #* Function:    export mysql database data to a flatfile                          *
-#* Last Modif.:	02/23/2016                                                        *
+#* Last Modif.:	03/09/2016                                                        *
 #**********************************************************************************
 
 #/bin/bash
 
 set +e # turn off errexit
 
-SCRIPT="export_mysql"
+SCRIPT="dump-all"
 DATE_STAMP="`date +"%Y-%m-%d"`"
-DIR="/dbservices/migration"
 DBS="Show databases;"
 TABLES="Show tables;"
 
@@ -100,7 +99,7 @@ if [ -n "$MYSQLDIR" ]; then
   MYSQLBIN=$MYSQLDIR/mysql
   MYSQLDUMP=$MYSQLDIR/mysqldump
   if [ ! -f $MYSQLBIN ] || [ ! -f $MYSQLDUMP ]; then
-    printf "mysqldump was not found in PATH. Please specify"
+    printf "mysql tools were not found in specified directory"
     exit 1
   fi
 else
