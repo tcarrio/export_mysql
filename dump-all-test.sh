@@ -8,10 +8,10 @@
 #/bin/bash
 
 DB_SCRIPTS="/dbs/migrate"
-PROG_NAME="export_mysql.sh"
-PROG_CALL="export_mysql"
+PROG_NAME="dump-all.sh"
+PROG_CALL="dump-all"
 LOGS="$DB_SCRIPTS/log"
-BIN_EXPORT_MYSQL="/usr/bin/export_mysql"
+BIN_EXPORT_MYSQL="/usr/bin/dump-all"
 DATE_STAMP=`date +"%Y-%m-%d"`
 BACK_DIR="/dbs/backups/2016"
 MIG_SRV="127.0.0.1" #filler
