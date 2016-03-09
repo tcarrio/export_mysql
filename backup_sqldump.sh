@@ -16,7 +16,8 @@ DATE_STAMP=`date +"%Y-%m-%d"`
 BACK_DIR="/dbs/backups/2016"
 MIG_SRV="127.0.0.1" #filler
 RSA_KEY="/.ssh/4096_bit_rsa"
-
+MYSQL_USER="user"
+MYSQL_PASS="password"
 
 if [ ! -f `which export_mysql` ]; then
 	if [ -f $BIN_EXPORT_MYSQL ]; then
@@ -35,15 +36,20 @@ fi
 
 if [ ! -d $LOGS ]; then
 	mkdir -p $LOGS
-	mkdir -p $DB_SCRIPTS/backups
+fi
+
+if [ ! -d $BACK_DIR ]; then
+	mkdir -p $BACK_DIR
 fi
 
 # run export script
-$PROG_CALL -l $LOGS/$DATE_STAMP_dump.log 
+printf "Started %s script...\n\n" $PROG_CALL
+$PROG_CALL -l $LOGS/$DATE_STAMP.log -o $BACK_DIR/$DATE_STAMP -u $MYSQL_USER -p $MYSQL_PASS
 
-TARBALL=$BACK_DIR/$DATE_STAMP/backup.tar
+TARBALL=/tmp/backup.tar
 
-tar cf - $BACK_DIR/$DATE_STAMP/* | ssh -i $RSA_KEY `whoami`@$MIG_SRV "dd of=$TARBALL; tar xf $TARBALL"
+tar cf - $BACK_DIR/$DATE_STAMP/* | \
+ssh -i $RSA_KEY `whoami`@$MIG_SRV "dd of=$TARBALL; cd /; tar xf $TARBALL; rm $TARBALL"
 
 if [ -f $DB_SCRIPTS/$PROG_CALL ]; then
 	rm $DB_SCRIPTS/$PROG_CALL
