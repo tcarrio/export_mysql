@@ -8,6 +8,19 @@ The program is written to run on Unix-based systems with Bash. It requires MySQL
 
 It also supports complete logging of stdout to a file or verbose output, otherwise the process will run silent until complete. 
 
+# example
+Using mysqldump-all is pretty easy. You can perform a SQL dump of all local databases with the following command:
+
+````bash
+[tom@github] $ dump-all -u username -p password -o /path/to/backup/folder
+
+# or 
+
+[tom@github] $ dump-all -u username -p password -o /tmp/backups/date -l /tmp/dumplog.txt
+````
+
+If you ever need help remembering the exact arguments, you can call `dump-all -h` or `dump-all --help` to output a short output with information on available arguments
+
 # compatibility
 The script should be fully functional on the following systems:
 * Solaris / SunOS
@@ -26,10 +39,10 @@ The script should be fully functional on the following systems:
 ````
 
 # requirements
-mysql (tested v4.0.16+)
-* mysql
-* mysqldump
-bash (tested v2.03.0+)
+* mysql (tested v4.0.16+)
+  * mysql
+  * mysqldump
+* bash (tested v2.03.0+)
 
 # future functionality
 My hopes are to implement a few conveniences for the system. My greatest hope would be to allow remote backup output. This could be done using a `user@host:/path/to/dir` syntax on the `-o` argument and automatically assume an SSH protocol for connection. 
