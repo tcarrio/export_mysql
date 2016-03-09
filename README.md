@@ -1,4 +1,4 @@
-# export_mysql
+# mysqldump-cli
 Argument-driven bash script to perform fallback SQL dumps of all MySQL databases
 
 # about
